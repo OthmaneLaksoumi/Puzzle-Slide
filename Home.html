@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Puzzle Slide</h1>
+
+    <div class="box-container">
+        <div class="box-child select" id="one" onclick="ChangePlace(this.id)">1</div>
+        <div class="box-child select" id="two" onclick="ChangePlace(this.id)">2</div>
+        <div class="box-child select" id="three" onclick="ChangePlace(this.id)">3</div>
+        <div class="box-child select" id="four" onclick="ChangePlace(this.id)">4</div>
+        <div class="box-child select" id="five" onclick="ChangePlace(this.id)">5</div>
+        <div class="box-child select" id="six" onclick="ChangePlace(this.id)">6</div>
+        <div class="box-child select" id="seven" onclick="ChangePlace(this.id)">7</div>
+        <div class="box-child select" id="eight" onclick="ChangePlace(this.id)">8</div>
+        <div class="select" id="empty"></div>
+
+    </div>
+
+    <button class="box-child button" onclick="restart()">Restart</button>
+
+    <button class="box-child button" onclick="order()">Affiche Order</button>
+
+
+
+
+
+    <script>
+
+        let boxes = document.querySelectorAll(".select");
+        
+        restart();
+
+        function restart() {
+            let arr = [];  
+            arr.push(boxes[0].style.order);
+            let i = 0;
+            while (arr.length < 10) {
+                let randomNumber = Math.floor(Math.random() * 10);
+                if (!arr.includes(randomNumber) && randomNumber > 0) {
+                    boxes[i].style.order = randomNumber;
+                    arr.push(randomNumber);
+                    i++;
+                }
+            }
+        }
+
+        function order() {
+            for (let i = 0; i < boxes.length; i++) {
+                console.log(boxes[i].innerHTML + " " + boxes[i].style.order);
+            }
+
+        }
+
+        function ChangePlace(id) {
+
+            let x = document.getElementById(id);
+            let empty = document.getElementById("empty");
+            if ((Math.abs(x.style.order - empty.style.order) === 1) || Math.abs(x.style.order - empty.style.order) === 3) {
+                var temp = x.style.order;
+                x.style.order = empty.style.order;
+                empty.style.order = temp;
+            }
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
